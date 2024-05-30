@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books List</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <h2 class="h2">Books List</h2>
+    </div>
+    <input type="text" [(ngModel)]="searchTitle" placeholder="Search by Title" class="form-control mb-3">
+    <input type="number" [(ngModel)]="minPrice" placeholder="Min Price" class="form-control mb-3">
+    <input type="number" [(ngModel)]="maxPrice" placeholder="Max Price" class="form-control mb-3">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Type</th>
+            <th class="text-center" scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of Books; let i = index" [hidden]="!bookMatches(book)">
+            <th scope="row">{{book._id}}</th>
+            <td>{{book.title}}</td>
+            <td>{{book.price}}</td>
+            <td>{{book.description}}</td>
+            <td>{{book.book_type}}</td>
+            <td class="text-center">
+              <button class="bg-green-700 hover:bg-green-800" routerLink="/edit-book/{{book._id}}">Edit</button>
+              <button class="bg-red-700 hover:bg-red-800" (click)="delete(book._id, i)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
